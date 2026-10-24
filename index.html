@@ -15,7 +15,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Poppins",sys
 .badge.yt{display:inline-flex;align-items:center;gap:6px;color:#F8312F;border-color:rgba(248,49,47,.5);background:#2a1514}
 .badge.obs{background:#162458;border-color:#2c4399;color:#ffffff}
 .badge{padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--panel);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted)}
-h1{margin:0 0 10px;font-size:clamp(32px,6vw,52px);line-height:1.1;letter-spacing:-.01em}
+h1{margin:0 0 10px;font-size:clamp(30px,5.6vw,52px);line-height:1.1;letter-spacing:-.01em;text-transform:uppercase}
 .lead{max-width:720px;margin:0 0 22px;color:var(--muted);font-size:18px}
 .checks{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:8px}
 .checks li{position:relative;padding-left:32px}
@@ -48,7 +48,7 @@ figcaption{margin-top:6px;font-size:13px;color:var(--muted)}
 .callout b{display:block;margin-bottom:2px}
 details{border:1px solid var(--line);border-radius:6px;background:var(--panel);margin-bottom:8px}
 summary{cursor:pointer;padding:12px 16px;font-weight:600}
-details[open] summary{color:var(--accent)}
+details:not(.drop)>summary::marker{color:var(--accent)}
 details p{margin:0;padding:0 16px 14px;color:var(--muted)}
 @media (max-width:860px){.step,.step.text{grid-template-columns:36px minmax(0,1fr)}.step figure,.step .figs{grid-column:1 / -1}.grid2{grid-template-columns:1fr}}
 .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -67,13 +67,26 @@ details.drop[open]>summary.dropsum{color:var(--text)}
 code.i{overflow-wrap:anywhere}
 @media (max-width:860px){.hero{grid-template-columns:1fr;gap:24px}}
 @media (max-width:560px){.wrap{padding-top:20px;padding-bottom:48px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}.card{padding:16px}.step,.step.text{gap:14px;padding:22px 0}h2.part{font-size:24px;margin-top:32px}.step h3{font-size:19px}.dropsum{font-size:22px;gap:10px}.dropsum .ico{width:34px;height:34px}button{min-height:44px}.copy{flex-direction:column}.copy code{white-space:normal;word-break:break-all}.callout{padding:10px 12px}}
+.copy.click code{cursor:pointer}
+.copy.click code:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.copy button{transition:transform .08s,border-color .15s,color .15s}
+.copy button:active{transform:scale(.94)}
+@keyframes copyPulse{from{box-shadow:0 0 0 0 rgba(233,192,48,.5)}to{box-shadow:0 0 0 8px rgba(233,192,48,0)}}
+.copy.done button{border-color:var(--accent);color:var(--accent);animation:copyPulse .5s ease-out}
+.copy.done code{border-color:var(--accent)}
+footer.help{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
+footer.help h2{margin:0 0 4px;font-size:18px}
+footer.help p{margin:0;color:var(--muted)}
+.btn-out{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--accent);border-radius:4px;color:var(--text);font-weight:600;text-decoration:underline;transition:transform .08s}
+.btn-out:active{transform:scale(.96)}
+.btn-out:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <div class="hero"><div class="herotext"><div class="badges"><span class="badge yt"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M9.545 15.568V8.432L15.818 12z"/><path fill="#F8312F" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YOUTUBE</span><span class="badge obs">OBS DOCK</span><span class="badge">STREAMER.BOT</span></div>
-<h1>Stream Dashboard</h1>
+<h1>STREAM DASHBOARD</h1>
 <p class="lead">Manage your YouTube livestream from a dock in OBS: title, description, category, tags, visibility, thumbnail, playlist and more. Every change goes to YouTube right away.</p>
 <ul class="checks">
 <li>Edit your title, description, category and tags without opening YouTube Studio</li>
@@ -84,7 +97,7 @@ code.i{overflow-wrap:anywhere}
 <h2>Quick access</h2>
 <p>Copy the action import string to get started. Save the dock file as <code class="i">StreamDashboard.html</code> in <code class="i">Documents\StreamTools</code> and replace YOURNAME in the file path with your Windows user name. Tested with Streamer.bot 1.0.7 on Windows.</p>
 <div class="grid2">
-<div><b>Action import string</b><div class="copy"><code id="c1">PASTE THE ACTION IMPORT STRING HERE</code><button data-copy="c1">Copy</button></div></div>
+<div><b>Action import string</b><div class="copy click"><code id="c1" tabindex="0" role="button" title="Click to copy">PASTE THE ACTION IMPORT STRING HERE</code><button type="button">Copy Import</button></div></div>
 <div><b>OBS Dock File Path</b><div class="copy"><code id="c2">file:///C:/Users/YOURNAME/Documents/StreamTools/StreamDashboard.html</code></div></div>
 </div>
 </div>
@@ -229,19 +242,42 @@ code.i{overflow-wrap:anywhere}
 <details><summary>The dock is blank in OBS</summary><p>Check the URL (file paths need forward slashes), then close and reopen the dock.</p></details>
 
 </div></details>
-<h2 class="part">Good to know</h2>
+<details class="drop"><summary class="dropsum"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span><span>Good to Know</span><span class="chev"></span></summary><div class="dropbody">
 <div class="callout"><b>Keep two files private</b>The JSON you downloaded from Google and <code class="i">youtube_token.json</code> in the StreamTools folder. Never show them on stream. Each person needs their own Google project, so never share your JSON file.</div>
 <div class="callout"><b>Limits</b>Google’s daily limit is 10,000 units and each change costs about 50, so normal use never gets close. YouTube’s API can’t change live chat replay or other chat settings, the game title field, or pinned messages. Use YouTube Studio for those.</div>
 <div class="callout"><b>Remove access</b>Go to myaccount.google.com/permissions, find Stream Dashboard and remove it. Then delete the StreamTools folder.</div>
+</div></details>
+
+<footer class="help">
+<div><h2>Need help?</h2><p>Join the Discord for support, updates and release notifications.</p></div>
+<a class="btn-out" href="https://discord.com/invite/TkkPsuVBFQ" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span>Discord</span></a>
+</footer>
 
 </div>
 <script>
-document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-  const text = document.getElementById(b.dataset.copy).textContent;
-  try { await navigator.clipboard.writeText(text); b.textContent = "Copied"; }
-  catch { b.textContent = "Select and copy"; }
-  setTimeout(() => { b.textContent = "Copy"; }, 1500);
-}));
+document.querySelectorAll(".copy.click").forEach(box => {
+  const code = box.querySelector("code"), button = box.querySelector("button"), label = button.textContent;
+  const copy = async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(code.textContent); ok = true; }
+    catch {
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const sel = getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { ok = document.execCommand("copy"); } catch { /* fall through */ }
+    }
+    button.textContent = ok ? "Copied" : "Press Ctrl+C";
+    box.classList.remove("done");
+    void box.offsetWidth;
+    if (ok) box.classList.add("done");
+    setTimeout(() => { button.textContent = label; box.classList.remove("done"); }, 1500);
+  };
+  button.addEventListener("click", copy);
+  code.addEventListener("click", copy);
+  code.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); copy(); } });
+});
 </script>
 </body>
 </html>
